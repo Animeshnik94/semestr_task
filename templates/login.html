@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <div class="login-page-container">
+        <div class="form-container">
+            <h1>Вход</h1>
+            <form action="{{ url_for('login') }}" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.username(class="form-control") }}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password(class="form-control") }}
+                </div>
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+        </div>
+        
+        <div class="information">
+            <div class="img-woman">
+                <img src="{{url_for('static', filename='images/bibliowoman.jpg')}}" alt="woman">
+            </div>
+            <div class="information-text">
+                <p>name = admin</p>
+                <p>password = 12345</p>
+            </div>
+        </div>
+    </div>
+    
+    
+{% endblock %}

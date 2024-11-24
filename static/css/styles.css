@@ -1,0 +1,174 @@
+@charset "UTF-8";
+/**
+ * Сброс стилей
+ **/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+input {
+  outline: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+/*-----------COMMON-----------*/
+body {
+  margin: 0;
+  padding-bottom: 80px;
+  background-color: #EDEAE5;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1500px;
+}
+
+.wrap {
+  margin: 0 auto;
+  max-width: 1350px;
+}
+
+/*-----------HEADER-----------*/
+header {
+  background-color: #4B3C31;
+}
+header .header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+header .header-wrap a {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+}
+header .header-wrap a:hover {
+  text-decoration: none;
+  color: #b4b4b4;
+}
+header .header-wrap .header_logo {
+  width: 70px;
+  height: auto;
+}
+header .header-wrap .header_logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*------------ADMIN AUTORIZATION----------*/
+.login-page-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  margin-top: 90px;
+}
+.login-page-container .form-container {
+  width: 450px; /* Максимальная ширина формы */
+  padding: 30px;
+  background-color: #f0f8ff; /* Цвет фона формы */
+  border-radius: 8px; /* Скругление углов формы */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Тень для визуального эффекта */
+}
+.login-page-container .form-container h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.information {
+  text-align: left;
+  font-size: 20px;
+}
+.information .img-woman {
+  width: 520px;
+  height: auto;
+  overflow: hidden;
+}
+.information .img-woman img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px; /* Скругляем углы изображения */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.information .information-text {
+  margin-top: 20px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+footer p {
+  margin: 0;
+}
+
+footer a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+}
+footer a .feedback-icon {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+footer a .feedback-icon img {
+  width: 100%;
+  height: auto;
+}
+
+/*# sourceMappingURL=styles.css.map */
