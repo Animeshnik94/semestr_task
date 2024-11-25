@@ -1,9 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
 from models import User
+from forms import LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'kfd843H(*&Y$&H)'
@@ -14,12 +12,6 @@ login_manager.init_app(app)
 # Предопределенные данные для входа
 USERNAME = "admin"
 PASSWORD = "12345"
-
-# Форма для входа
-class LoginForm(FlaskForm):
-    username = StringField('Имя пользователя', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    submit = SubmitField('Войти')
 
 @login_manager.user_loader
 def load_user(username):
@@ -43,7 +35,7 @@ def login():
 @app.route('/index')
 @login_required
 def index():
-    return 'Добро пожаловать, админ! <a href="/logout">Выйти</a>'
+    return render_template('index.html')
 
 @app.route('/logout')
 @login_required
@@ -52,4 +44,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)         
+    app.run(debug=True)

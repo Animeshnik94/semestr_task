@@ -84,6 +84,37 @@ header .header-wrap {
   align-items: center;
   padding-top: 10px;
 }
+header .header-wrap ul {
+  display: flex;
+  align-items: center;
+}
+header .header-wrap ul li {
+  display: inline-block; /* Делаем элементы списка блочными */
+  margin-right: 20px; /* Отступы между пунктами */
+}
+header .header-wrap ul .action-item {
+  border: 1px solid #ccc; /* Цвет рамки */
+  padding: 6px; /* Отступ вокруг текста */
+  border-radius: 9px; /* Закругленные углы */
+  background-color: #EDEAE5; /* Цвет фона, вы можете изменить по своему усмотрению */
+}
+header .header-wrap ul .action-item a {
+  color: #000;
+}
+header .header-wrap ul .action-item:hover {
+  background-color: #797775;
+  border: 1px solid #797775;
+}
+header .header-wrap ul .action-item:hover a {
+  color: white;
+}
+header .header-wrap ul .separator {
+  display: inline-block;
+  width: 20px; /* Расстояние между блоками */
+  height: 1px; /* Высота разделителя */
+  margin: 0 10px; /* Отступы вокруг разделителя */
+  vertical-align: middle; /* Центрирование разделителя по вертикали */
+}
 header .header-wrap a {
   font-size: 18px;
   text-transform: uppercase;
@@ -169,6 +200,60 @@ footer a .feedback-icon {
 footer a .feedback-icon img {
   width: 100%;
   height: auto;
+}
+
+.about-site {
+  margin: 40px auto;
+  max-width: 400px;
+  text-align: center;
+}
+.about-site h1 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.slider {
+  box-shadow: 13px 12px 6px -3px rgba(34, 60, 80, 0.2);
+  position: relative;
+  max-width: 700px;
+  margin: 50px auto;
+  overflow: hidden;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+.slider .slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slider .slides .slide {
+  min-width: 100%;
+  height: 500px;
+  display: none;
+}
+.slider .slides .slide.active {
+  display: block;
+}
+.slider .slides .slide.active img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+}
+.slider .arrow.moveLeft {
+  left: 10px;
+}
+.slider .arrow.moveRight {
+  right: 10px;
 }
 
 /*# sourceMappingURL=styles.css.map */

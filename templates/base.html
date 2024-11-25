@@ -14,24 +14,42 @@
     <header>
         <div class="wrap">
             <div class="header-wrap">
-                <a href="{{url_for('login')}}">
+                <a {% if current_user.is_authenticated %} href="{{url_for('index')}}" {% else %}  href="{{url_for('login')}}"{% endif %}>
                     <div class="header_logo">
                         <img src="/static/icons/icon.png" alt="book">
                     </div>
                 </a>
-                
-                {% if logged_in %}
-                <nav>
-                    <ul>
-                        <li></li>
-    
-                    </ul>
-                </nav>
-                </div>
+                {% if current_user.is_authenticated %}
+                    <nav>
+                        <ul>
+                            <li class="action-item">
+                                <a href="#">Выдать</a>    
+                            </li>
+                            <li class="action-item">
+                                <a href="#">Забрать</a>    
+                            </li>
+                            <div class="separator"></div> <!-- Разделитель -->
+                            <li>
+                                <a href="#">Книги</a>    
+                            </li>
+                            <li>
+                                <a href="#">Читатели</a>    
+                            </li>
+                            <li>
+                                <a href="#">Отчеты</a>    
+                            </li>
+                            <div class="separator"></div> <!-- Разделитель -->
+                            <li>
+                                <a href="{{url_for('logout')}}">Выйти</a>    
+                            </li>
+                        </ul>
+                    </nav>
                 {% else %}
-                <a href="{{url_for('login')}}"><h1>Войти</h1></a>
+                    <a href="{{url_for('login')}}"><h1>Войти</h1></a>
                 {% endif %}
             </div>
+                
+        </div>
     </header>
 
     <main>
