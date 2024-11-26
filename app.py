@@ -43,5 +43,10 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+@app.route('/books')
+@login_required
+def books():
+    return render_template('books.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
