@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon.png') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="wrap">
+            <div class="header-wrap">
+                <a {% if current_user.is_authenticated %} href="{{url_for('index')}}" {% else %}  href="{{url_for('login')}}"{% endif %}>
+                    <div class="header_logo">
+                        <img src="/static/icons/icon.png" alt="book">
+                    </div>
+                </a>
+                {% if current_user.is_authenticated %}
+                    <nav>
+                        <ul>
+                            <li class="action-item">
+                                <a href="#">Выдать</a>    
+                            </li>
+                            <li class="action-item">
+                                <a href="#">Забрать</a>    
+                            </li>
+                            <div class="separator"></div> <!-- Разделитель -->
+                            <li>
+                                <a href="{{url_for('books')}}">Книги</a>    
+                            </li>
+                            <li>
+                                <a href="#">Читатели</a>    
+                            </li>
+                            <li>
+                                <a href="#">Отчеты</a>    
+                            </li>
+                            <div class="separator"></div> <!-- Разделитель -->
+                            <li>
+                                <a href="{{url_for('logout')}}">Выйти</a>    
+                            </li>
+                        </ul>
+                    </nav>
+                {% else %}
+                    <a href="{{url_for('login')}}"><h1>Войти</h1></a>
+                {% endif %}
+            </div>
+                
+        </div>
+    </header>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <p>Обратная связь с разработчиком:</p>
+        
+        <a href="https://github.com/Animeshnik94" target="_blank">
+            <div class="feedback-icon">
+                <img src="/static/icons/github.svg" alt="GitHub">
+            </div>
+            <p>GitHub</p>
+        </a>
+        
+        <a href="https://t.me/Artur32342" target="_blank">
+            <div class="feedback-icon">
+                <img src="/static/icons/telegram.svg" alt="Telegram">
+            </div>
+            <p>Telegram</p>
+        </a>
+        
+        <p>&copy; 2024 Artur</p>
+    </footer>
+</body>
+</html>

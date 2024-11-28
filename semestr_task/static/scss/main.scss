@@ -1,0 +1,238 @@
+@charset "UTF-8";
+@use 'reset';
+
+
+/*-----------COMMON-----------*/
+body{
+    margin: 0;
+    padding-bottom: 80px; 
+    background-color: #EDEAE5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    margin: 0 auto;
+    max-width: 1500px;
+}
+.wrap{
+    margin: 0 auto;
+    max-width: 1350px;
+}
+
+
+/*-----------HEADER-----------*/
+
+header{
+    background-color: #4B3C31;
+
+    .header-wrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+
+        ul{
+            display: flex;
+            align-items: center;
+
+            & li{
+                display: inline-block; /* Делаем элементы списка блочными */
+                margin-right: 20px; /* Отступы между пунктами */
+
+            }
+            .action-item {
+                a{
+                    color: #000;
+                }
+                
+                border: 1px solid #ccc; /* Цвет рамки */
+                padding: 6px; /* Отступ вокруг текста */
+                border-radius: 9px; /* Закругленные углы */
+                background-color: #EDEAE5; /* Цвет фона, вы можете изменить по своему усмотрению */
+                &:hover{
+                    background-color: #797775;
+                    border: 1px solid #797775;
+
+                    a{
+                        color: #ffff;
+                    }
+                }
+            }
+            
+            .separator {
+                display: inline-block;
+                width: 20px; /* Расстояние между блоками */
+                height: 1px; /* Высота разделителя */
+                margin: 0 10px; /* Отступы вокруг разделителя */
+                vertical-align: middle; /* Центрирование разделителя по вертикали */
+            }
+        }
+
+        a{
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #ffff;
+
+            &:hover{
+                text-decoration: none;
+                color: #b4b4b4;
+            }
+        }
+        
+
+        .header_logo{
+            width: 70px;
+            height: auto;
+            img{
+                max-width: 100%;
+                height: auto; 
+            }
+        }
+    }
+}
+
+/*------------ADMIN AUTORIZATION----------*/
+
+.login-page-container{
+    display: flex;
+    justify-content: space-around;
+    align-items:start;
+    margin-top: 90px;
+    .form-container{
+        width: 450px; /* Максимальная ширина формы */
+        padding: 30px;
+        background-color: #f0f8ff; /* Цвет фона формы */
+        border-radius: 8px; /* Скругление углов формы */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Тень для визуального эффекта */
+        h1{
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+    }
+    
+}
+
+
+.information{
+    text-align: left;
+    font-size: 20px;
+    .img-woman{
+        width: 520px;
+        height: auto;
+        overflow: hidden;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            
+            border-radius: 15px; /* Скругляем углы изображения */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        } 
+    }
+    .information-text{
+        margin-top: 20px;
+    }
+}
+
+footer {
+    position: fixed; // Фиксируем футер
+    left: 0;
+    bottom: 0; // Приклеиваем к низу экрана
+    width: 100%; // Ширина 100%
+    background-color: #f1f1f1;;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); // Тень для футера (по желанию)
+    
+    p {
+        margin: 0; // Убираем отступы
+    }
+}
+
+// Стили для ссылок
+footer a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #000;
+    display: inline-flex; // Используем flex для центровки иконки и текста
+    align-items: center;
+
+    .feedback-icon {
+        width: 30px;
+        height: auto;
+        margin-right: 5px; // Отступ между иконкой и текстом
+
+        img {
+            width: 100%;
+            height: auto; // Соотношение сторон изображения
+        }
+    }
+}
+
+// ------------INDEX------------
+
+.about-site{
+    margin: 40px auto;
+    max-width: 400px;
+    text-align: center;
+    h1{
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+}
+
+$slider-width: 700px;
+$slider-height: 500px; // Добавили высоту для слайдера
+$arrow-background: rgba(255, 255, 255, 0.8);
+$arrow-font-size: 18px;
+
+.slider {
+    box-shadow: 13px 12px 6px -3px rgba(34, 60, 80, 0.2);
+    position: relative;
+    max-width: $slider-width;
+    margin: 50px auto; // Оставил только auto для центрирования
+    overflow: hidden;
+    border: 3px solid black;
+    border-radius: 5px;
+
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease;
+
+        .slide {
+            min-width: 100%;
+            height: $slider-height; // Задаем высоту для всех слайдов
+            display: none; // Скрываем все слайды по умолчанию
+
+            &.active {
+                display: block; // Показываем только активный слайд
+
+                img {
+                    width: 100%; // Задаем ширину изображения 100%
+                    height: 100%; // Автоматически выбираем высоту, чтобы сохранить пропорции
+                    object-fit: cover; 
+                }
+            }
+        }
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: $arrow-background;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        font-size: $arrow-font-size;
+
+        &.moveLeft {
+            left: 10px; // Левый отступ от края слайдера
+        }
+
+        &.moveRight {
+            right: 10px; // Правый отступ от края слайдера
+        }
+    }
+}

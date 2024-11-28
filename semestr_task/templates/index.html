@@ -1,0 +1,31 @@
+<!-- index.html -->
+{% extends "base.html" %}
+
+{% block title %}Админка{% endblock %}
+
+{% block content %}
+    <div class="about-site">
+        <h1>Вы зашли на сайт администратора библеотеки.</h1>
+        <p>Издевайтесь над читателями как хотите.</p>
+    </div>
+
+    <div class="slider">
+        <div class="slides">
+            <div class="slide active">
+                <img src="{{ url_for('static', filename='images/slider/pushkin.png') }}" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='images/slider/kawasaki.jpg') }}" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='images/slider/tuatara.jpg') }}" alt="Slide 3">
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='images/slider/deer.jpg') }}" alt="Slide 3">
+            </div>
+        </div>
+        <button id="moveLeft" class="arrow moveLeft">◀</button>
+        <button id="moveRight" class="arrow moveRight">▶</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+{% endblock %}

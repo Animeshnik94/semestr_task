@@ -1,0 +1,259 @@
+@charset "UTF-8";
+/**
+ * Сброс стилей
+ **/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+input {
+  outline: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+/*-----------COMMON-----------*/
+body {
+  margin: 0;
+  padding-bottom: 80px;
+  background-color: #EDEAE5;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1500px;
+}
+
+.wrap {
+  margin: 0 auto;
+  max-width: 1350px;
+}
+
+/*-----------HEADER-----------*/
+header {
+  background-color: #4B3C31;
+}
+header .header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+header .header-wrap ul {
+  display: flex;
+  align-items: center;
+}
+header .header-wrap ul li {
+  display: inline-block; /* Делаем элементы списка блочными */
+  margin-right: 20px; /* Отступы между пунктами */
+}
+header .header-wrap ul .action-item {
+  border: 1px solid #ccc; /* Цвет рамки */
+  padding: 6px; /* Отступ вокруг текста */
+  border-radius: 9px; /* Закругленные углы */
+  background-color: #EDEAE5; /* Цвет фона, вы можете изменить по своему усмотрению */
+}
+header .header-wrap ul .action-item a {
+  color: #000;
+}
+header .header-wrap ul .action-item:hover {
+  background-color: #797775;
+  border: 1px solid #797775;
+}
+header .header-wrap ul .action-item:hover a {
+  color: white;
+}
+header .header-wrap ul .separator {
+  display: inline-block;
+  width: 20px; /* Расстояние между блоками */
+  height: 1px; /* Высота разделителя */
+  margin: 0 10px; /* Отступы вокруг разделителя */
+  vertical-align: middle; /* Центрирование разделителя по вертикали */
+}
+header .header-wrap a {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+}
+header .header-wrap a:hover {
+  text-decoration: none;
+  color: #b4b4b4;
+}
+header .header-wrap .header_logo {
+  width: 70px;
+  height: auto;
+}
+header .header-wrap .header_logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*------------ADMIN AUTORIZATION----------*/
+.login-page-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  margin-top: 90px;
+}
+.login-page-container .form-container {
+  width: 450px; /* Максимальная ширина формы */
+  padding: 30px;
+  background-color: #f0f8ff; /* Цвет фона формы */
+  border-radius: 8px; /* Скругление углов формы */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Тень для визуального эффекта */
+}
+.login-page-container .form-container h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.information {
+  text-align: left;
+  font-size: 20px;
+}
+.information .img-woman {
+  width: 520px;
+  height: auto;
+  overflow: hidden;
+}
+.information .img-woman img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px; /* Скругляем углы изображения */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.information .information-text {
+  margin-top: 20px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+footer p {
+  margin: 0;
+}
+
+footer a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+}
+footer a .feedback-icon {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+footer a .feedback-icon img {
+  width: 100%;
+  height: auto;
+}
+
+.about-site {
+  margin: 40px auto;
+  max-width: 400px;
+  text-align: center;
+}
+.about-site h1 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.slider {
+  box-shadow: 13px 12px 6px -3px rgba(34, 60, 80, 0.2);
+  position: relative;
+  max-width: 700px;
+  margin: 50px auto;
+  overflow: hidden;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+.slider .slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slider .slides .slide {
+  min-width: 100%;
+  height: 500px;
+  display: none;
+}
+.slider .slides .slide.active {
+  display: block;
+}
+.slider .slides .slide.active img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+}
+.slider .arrow.moveLeft {
+  left: 10px;
+}
+.slider .arrow.moveRight {
+  right: 10px;
+}
+
+/*# sourceMappingURL=styles.css.map */
