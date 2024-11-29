@@ -59,7 +59,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 /*-----------COMMON-----------*/
 body {
   margin: 0;
-  padding-bottom: 80px;
+  padding-bottom: 130px;
   background-color: #EDEAE5;
   font-family: "Roboto", sans-serif;
 }
@@ -254,6 +254,15 @@ footer a .feedback-icon img {
 }
 .slider .arrow.moveRight {
   right: 10px;
+}
+
+.additional-elements {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.additional-elements .form-control {
+  max-width: 400px;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -21,7 +21,6 @@ class Book(db.Model):
 
     def __repr__(self):
         return f'<Book {self.title}, Author {self.author}>'
-    
 
 class Reader(db.Model):
     __tablename__ = 'readers'
@@ -45,8 +44,6 @@ class Loan(db.Model):
 
     def __repr__(self):
         return f'<Loan {self.book.title} to {self.reader.first_name}>'
-
-
 
 # # Пример регистрации читателя
 def register_reader(first_name, last_name, card_number):

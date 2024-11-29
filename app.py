@@ -92,16 +92,27 @@ def add_book():
     form = BookForm()
     if form.validate_on_submit():
         print(f'Добавляем книгу: {form.title.data}, {form.author.data}, {form.publication_year.data}, {form.genre.data}, {form.copies.data}')  # Логируем данные
-        new_book = Book(
+        existing_book = Book.query.filter_by(
             title=form.title.data,
             author=form.author.data,
-            publication_year=form.publication_year.data,
-            genre=form.genre.data,
-            copies=form.copies.data
-        )
-        db.session.add(new_book)
-        db.session.commit()
-        flash('Книга успешно добавлена!', 'success')
+            publication_year=form.publication_year.data
+        ).first()
+
+        if existing_book:
+            existing_book.copies += form.copies.data
+            db.session.commit()
+            flash('Количество копий книги увеличено!', 'success')
+        else:
+            new_book = Book(
+                title=form.title.data,
+                author=form.author.data,
+                publication_year=form.publication_year.data,
+                genre=form.genre.data,
+                copies=form.copies.data
+            )
+            db.session.add(new_book)
+            db.session.commit()
+            flash('Книга успешно добавлена!', 'success')
         return redirect(url_for('books', form=form))
     else:
         print(form.errors)

@@ -5,7 +5,7 @@
 /*-----------COMMON-----------*/
 body{
     margin: 0;
-    padding-bottom: 80px; 
+    padding-bottom: 130px; 
     background-color: #EDEAE5;
     font-family: 'Roboto', sans-serif;
 }
@@ -234,5 +234,16 @@ $arrow-font-size: 18px;
         &.moveRight {
             right: 10px; // Правый отступ от края слайдера
         }
+    }
+}
+
+// ------------TABLES book users------------
+
+.additional-elements{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .form-control {
+        max-width: 400px;
     }
 }
