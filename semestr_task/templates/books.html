@@ -34,15 +34,9 @@
                     <td>{{ book.genre }}</td>
                     <td>{{ book.copies }}</td>
                     <td>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#editBookModal"
-                                data-id="{{ book.id }}"
-                                data-title="{{ book.title }}"
-                                data-author="{{ book.author }}"
-                                data-publication-year="{{ book.publication_year }}"
-                                data-genre="{{ book.genre }}"
-                                data-copies="{{ book.copies }}">
+                        <a class="btn btn-warning" href="{{ url_for('edit_book', book_id=book.id) }}">
                             <i class="fas fa-edit"></i>
-                        </button>
+                        </a>
                         <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST" style="display:inline;">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить эту книгу?');">
                                 <i class="fas fa-trash-alt"></i>
@@ -98,67 +92,6 @@
     </div>
 </div>
 
-<!-- Модальное окно для редактирования книги -->
-<div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editBookModalLabel">Редактировать книгу</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editBookForm" method="POST" action="">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        <label for="title">Название</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="author">Автор</label>
-                        <input type="text" class="form-control" id="author" name="author" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="publication_year">Год издания</label>
-                        <input type="number" class="form-control" id="publication_year" name="publication_year" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="genre">Жанр</label>
-                        <input type="text" class="form-control" id="genre" name="genre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="copies">Количество</label>
-                        <input type="number" class="form-control" id="copies" name="copies" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Изменить</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Обработчик события для открытия модального окна
-    $('#editBookModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Кнопка, которая вызвала модал
-        var bookId = button.data('id'); // Извлечение ID книги из атрибутов кнопки
-        var title = button.data('title');
-        var author = button.data('author');
-        var publicationYear = button.data('publication-year');
-        var genre = button.data('genre');
-        var copies = button.data('copies');
-
-        // Используйте bookId для обновления формы редактирования
-        var modal = $(this);
-        modal.find('#editBookForm').attr('action', '{{ url_for("edit_book", book_id="") }}' + bookId);
-        modal.find('#title').val(title);
-        modal.find('#author').val(author);
-        modal.find('#publication_year').val(publicationYear);
-        modal.find('#genre').val(genre);
-        modal.find('#copies').val(copies);
-    });
-</script>
 <!-- Подключение скриптов для Bootstrap 4 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

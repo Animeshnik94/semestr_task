@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Редактирование книги{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+    <div class="form-container">
+        <div class="container mt-5">
+            <h1>Редактировать книгу</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="title">Название</label>
+                    {{ form.title(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="author">Автор</label>
+                    {{ form.author(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="publication_year">Год издания</label>
+                    {{ form.publication_year(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="genre">Жанр</label>
+                    {{ form.genre(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="copies">Количество</label>
+                    {{ form.copies(class="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                <a href="{{ url_for('books') }}" class="btn btn-secondary">Назад к списку книг</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

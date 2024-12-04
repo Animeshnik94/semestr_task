@@ -39,6 +39,8 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+#---------------BOOKS PAGE------------------------
+
 @app.route('/books', methods=['GET', 'POST'])
 @login_required
 def books():
@@ -62,23 +64,31 @@ def books():
 
 
 @app.route('/edit_book/<int:book_id>', methods=['GET', 'POST'])
-@login_required
 def edit_book(book_id):
-    if not book_id:  # Это будет истинно, если book_id пустое
-        flash('ID книги не может быть пустым', 'danger')
+    book = Book.query.get(book_id)
+    if not book:
+        flash('Книга не найдена.', 'danger')
         return redirect(url_for('books'))
-    book = Book.query.get_or_404(book_id)
-    form = BookForm(obj=book)  # Предполагается, что вы добавили BookForm
+
+    form = BookForm(obj=book)  # Предзаполняем форму данными книги
     if form.validate_on_submit():
-        book.title = form.title.data
-        book.author = form.author.data
-        book.publication_year = form.publication_year.data
-        book.genre = form.genre.data
-        book.copies = form.copies.data
-        db.session.commit()
+        # Обновляем только те поля, которые заданы в форме
+        if form.title.data:  # Проверка на заполнение поля
+            book.title = form.title.data
+        if form.author.data:
+            book.author = form.author.data
+        if form.publication_year.data:
+            book.publication_year = form.publication_year.data
+        if form.genre.data:
+            book.genre = form.genre.data
+        if form.copies.data:
+            book.copies = form.copies.data
+        
+        db.session.commit()  # Сохраняем изменения в базе данных
         flash('Книга успешно обновлена!', 'success')
-        return redirect(url_for('books'))
-    return render_template('books.html', form=form, book=book)
+        return redirect(url_for('books'))  # Возвращаемся на страницу со списком книг
+
+    return render_template('edit_book.html', form=form, book=book)  # Показываем страницу редактирования
 
 @app.route('/delete_book/<int:book_id>', methods=['POST'])
 @login_required
@@ -124,6 +134,9 @@ def add_book():
     # Если форма не корректна, отправьте обратно на страницу books
     # или отобразите сообщения об ошибках.
     return redirect(url_for('books'))  # Либо вы можете отобразить ошибки
+
+#---------------READERS---------------
+
 
 if __name__ == '__main__':
     app.run(debug=True)

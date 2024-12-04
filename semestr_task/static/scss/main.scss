@@ -247,3 +247,24 @@ $arrow-font-size: 18px;
         max-width: 400px;
     }
 }
+
+// ------------EDIT BOOK FORM------------
+
+.edit-container{
+    display: flex;
+    justify-content: space-around;
+    align-items:start;
+    margin-top: 30px;
+    .form-container{
+        width: 450px; /* Максимальная ширина формы */
+        padding: 10px 6px;
+        background-color: #f0f8ff; /* Цвет фона формы */
+        border-radius: 8px; /* Скругление углов формы */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Тень для визуального эффекта */
+        h1{
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+    }
+}
