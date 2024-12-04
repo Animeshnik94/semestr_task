@@ -8,6 +8,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     submit = SubmitField('Войти')
 
+# Форма для добавления/редактирования книги
 class BookForm(FlaskForm):
     title = StringField('Название', validators=[DataRequired()])
     author = StringField('Автор', validators=[DataRequired()])
@@ -15,3 +16,4 @@ class BookForm(FlaskForm):
     genre = StringField('Жанр', validators=[DataRequired()])
     copies = IntegerField('Количество', validators=[DataRequired()])
     submit = SubmitField('Сохранить')
+

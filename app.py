@@ -64,6 +64,9 @@ def books():
 @app.route('/edit_book/<int:book_id>', methods=['GET', 'POST'])
 @login_required
 def edit_book(book_id):
+    if not book_id:  # Это будет истинно, если book_id пустое
+        flash('ID книги не может быть пустым', 'danger')
+        return redirect(url_for('books'))
     book = Book.query.get_or_404(book_id)
     form = BookForm(obj=book)  # Предполагается, что вы добавили BookForm
     if form.validate_on_submit():
@@ -75,7 +78,7 @@ def edit_book(book_id):
         db.session.commit()
         flash('Книга успешно обновлена!', 'success')
         return redirect(url_for('books'))
-    return render_template('edit_book.html', form=form, book=book)
+    return render_template('books.html', form=form, book=book)
 
 @app.route('/delete_book/<int:book_id>', methods=['POST'])
 @login_required
