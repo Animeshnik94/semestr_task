@@ -17,3 +17,8 @@ class BookForm(FlaskForm):
     copies = IntegerField('Количество', validators=[DataRequired()])
     submit = SubmitField('Сохранить')
 
+class ReaderForm(FlaskForm):
+    first_name = StringField('Имя', validators=[DataRequired()])
+    last_name = StringField('Фамилия', validators=[DataRequired()])
+    card_number = IntegerField('Номер читательского билета', validators=[DataRequired()])
+    submit = SubmitField('Сохранить')

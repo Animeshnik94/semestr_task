@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, flash, jsonify
 from flask_login import login_user, login_required, current_user, logout_user
-from semestr_task.forms import LoginForm, BookForm
+from semestr_task.forms import LoginForm, BookForm, ReaderForm
 from semestr_task import create_app, db, login_manager
-from semestr_task.models import User, Book
+from semestr_task.models import User, Book, Reader
 
 app = create_app()
 
@@ -137,6 +137,87 @@ def add_book():
 
 #---------------READERS---------------
 
+@app.route('/readers', methods=['GET', 'POST'])
+@login_required
+def readers():
+    form = ReaderForm()
+    readers = Reader.query.all()
+
+    if form.validate_on_submit():
+        new_reader = Reader(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            card_number=form.card_number.data
+        )
+        db.session.add(new_reader)
+        db.session.commit()
+        flash('Читатель успешно добавлен!', 'success')
+        return redirect(url_for('readers'))
+
+    return render_template('readers.html', readers=readers, form=form)
+
+@app.route('/add_reader', methods=['POST'])
+@login_required
+def add_reader():
+    form = ReaderForm()
+    if form.validate_on_submit():
+        print(f'Добавляем читателя: {form.first_name.data}, {form.last_name.data}, {form.card_number.data}')
+        existing_reader = Reader.query.filter_by(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            card_number=form.card_number.data
+        ).first()
+
+        if existing_reader:
+            flash('Такой чувак уже есть!', 'danger')
+        else:
+            new_reader = Reader(
+                first_name=form.first_name.data,
+                last_name=form.last_name.data,
+                card_number=form.card_number.data
+            )
+            db.session.add(new_reader)
+            db.session.commit()
+            flash('Читатель успешно добавлен!', 'success')
+        return redirect(url_for('readers', form=form))
+    else:
+        print(form.errors)
+        flash('Ошибка при добавлении читателя. Пожалуйста, проверьте введенные данные.', 'danger')
+    return redirect(url_for('readers', form=form))
+
+@app.route('/edit_reader/<int:reader_id>', methods=['GET', 'POST'])
+def edit_reader(reader_id):
+    reader = Reader.query.get(reader_id)
+    if not reader:
+        flash('Читатель не найден.', 'danger')
+        return redirect(url_for('readers'))
+
+    form = ReaderForm(obj=reader)  # Предзаполняем форму данными Читателя
+    if form.validate_on_submit():
+        # Обновляем только те поля, которые заданы в форме
+        if form.first_name.data:  # Проверка на заполнение поля
+            reader.first_name = form.first_name.data
+        if form.last_name.data:
+            reader.last_name = form.last_name.data
+        
+        
+        db.session.commit()  # Сохраняем изменения в базе данных
+        flash('Читатель успешно обновлен!', 'success')
+        return redirect(url_for('readers'))  # Возвращаемся на страницу со списком книг
+
+    return render_template('edit_reader.html', form=form, reader=reader)  # Показываем страницу редактирования
+
+@app.route('/delete_reader/<int:reader_id>', methods=['POST'])
+@login_required
+def delete_reader(reader_id):
+    reader = Reader.query.get_or_404(reader_id)
+    db.session.delete(reader)
+    db.session.commit()
+    flash('Читатель успешно удален!', 'success')
+    return redirect(url_for('readers'))
+    
+
+#-------------------------------------
 
 if __name__ == '__main__':
     app.run(debug=True)
