@@ -1,8 +1,9 @@
-from flask import render_template, redirect, url_for, flash, jsonify
+from flask import render_template, redirect, url_for, flash, jsonify, request
 from flask_login import login_user, login_required, current_user, logout_user
-from semestr_task.forms import LoginForm, BookForm, ReaderForm
+from semestr_task.forms import LoginForm, BookForm, ReaderForm, LoanForm
 from semestr_task import create_app, db, login_manager
-from semestr_task.models import User, Book, Reader
+from semestr_task.models import User, Book, Reader, Loan
+from sqlalchemy.exc import IntegrityError
 
 app = create_app()
 
@@ -60,7 +61,7 @@ def books():
         flash('Книга успешно добавлена!', 'success')
         return redirect(url_for('books'))
 
-    return render_template('books.html', books=books, form=form)  # Передаем форму в шаблон
+    return render_template('books.html', books=books, form=form)  # Передаем книги в шаблон
 
 
 @app.route('/edit_book/<int:book_id>', methods=['GET', 'POST'])
@@ -199,7 +200,8 @@ def edit_reader(reader_id):
             reader.first_name = form.first_name.data
         if form.last_name.data:
             reader.last_name = form.last_name.data
-        
+        if form.card_number.data:
+            reader.card_number = form.card_number.data
         
         db.session.commit()  # Сохраняем изменения в базе данных
         flash('Читатель успешно обновлен!', 'success')
@@ -216,8 +218,46 @@ def delete_reader(reader_id):
     flash('Читатель успешно удален!', 'success')
     return redirect(url_for('readers'))
     
+#---------------Loan---------------
 
+@app.route('/loan/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def loan_book(book_id):
+    form = LoanForm()
+
+    if form.validate_on_submit():
+        card_number = form.card_number.data
+
+        # Проверяем, существует ли читатель с введенным номером
+        reader = Reader.query.filter_by(card_number=card_number).first()
+
+        if reader:
+            # Находим книгу по book_id
+            book = Book.query.get(book_id)
+
+            # Проверяем, есть ли доступные экземпляры книги
+            if book and book.copies > 0:
+                # Если читатель найден и есть доступные экземпляры, создаем запись о займе
+                new_loan = Loan(book_id=book_id, reader_id=reader.id)
+                db.session.add(new_loan)
+
+                # Снижаем количество доступных экземпляров на 1
+                book.copies -= 1
+                db.session.commit()  # Сохраняем изменения в базе данных
+
+                print(f"Книга {book_id} выдана читателю с номером билета - {card_number}")
+                flash('Книга успешно выдана!', 'success')
+                return redirect(url_for('books'))
+            else:
+                flash('Нет доступных экземпляров книги.', 'danger')
+        else:
+            flash('Читатель с указанным номером не найден.', 'danger')
+
+    # Если форма не прошла валидацию или при других ошибках, 
+    # отображаем шаблон loan_book.html с необходимыми данными
+    return render_template('loan_book.html', form=form, book_id=book_id)
 #-------------------------------------
+
 
 if __name__ == '__main__':
     app.run(debug=True)

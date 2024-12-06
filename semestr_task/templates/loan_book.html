@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Выдать книгу{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+    <div class="form-container">
+        <div class="container mt-5">
+            <h1>Выдать книгу</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="title">Номер читательского билета</label>
+                    {{ form.card_number(class="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-primary">Выдать</button>
+                <a href="{{ url_for('books') }}" class="btn btn-secondary">Назад к списку книг</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

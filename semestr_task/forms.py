@@ -22,3 +22,7 @@ class ReaderForm(FlaskForm):
     last_name = StringField('Фамилия', validators=[DataRequired()])
     card_number = IntegerField('Номер читательского билета', validators=[DataRequired()])
     submit = SubmitField('Сохранить')
+
+class LoanForm(FlaskForm):
+    card_number = IntegerField('Номер читательского билета:', validators=[DataRequired()])
+    submit = SubmitField('Сохранить')
