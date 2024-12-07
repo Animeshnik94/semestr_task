@@ -256,7 +256,43 @@ def loan_book(book_id):
     # Если форма не прошла валидацию или при других ошибках, 
     # отображаем шаблон loan_book.html с необходимыми данными
     return render_template('loan_book.html', form=form, book_id=book_id)
-#-------------------------------------
+
+#-------------Return--------------------
+
+@app.route('/return_book/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def return_book(book_id):
+    form = LoanForm()
+
+    if form.validate_on_submit():
+        card_number = form.card_number.data
+
+        # Проверяем, существует ли читатель с введенным номером
+        reader = Reader.query.filter_by(card_number=card_number).first()
+
+        if not reader:
+            flash('Читатель с указанным номером не найден.', 'danger')
+            return redirect(url_for('books'))
+
+        # Находим заем книги для данного читателя
+        loan = Loan.query.filter_by(reader_id=reader.id, book_id=book_id).first()
+
+        if not loan:
+            flash('Этот читатель не брал эту книгу!', 'danger')
+            return redirect(url_for('books'))
+
+        # Если читатель и заем найдены, обновляем количество экземпляров книги
+        book = Book.query.get(book_id)
+        if book:
+            book.copies += 1
+            db.session.delete(loan)
+            db.session.commit()
+            flash('Книга успешно возвращена!', 'success')
+            return redirect(url_for('books'))
+        else:
+            flash('Книга не найдена.', 'danger')
+
+    return render_template('return_book.html', form=form, book_id=book_id)
 
 
 if __name__ == '__main__':
