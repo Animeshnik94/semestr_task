@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Отчеты{% endblock %}
+
+{% block content %}
+<h2 style="font-size: 26px; font-weight: bold; margin: 15px 0;">Всего книг в библеотеке: {{ total_books }}</h2>
+
+{% if genre_report %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Жанр</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for genre, count in genre_report %}
+                <tr>
+                    <td>{{ genre }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No books found by genre.</p>
+{% endif %}
+
+<a href="{{url_for('index')}}" class="btn btn-primary">Back to Home</a>
+{% endblock %}

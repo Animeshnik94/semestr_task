@@ -29,6 +29,9 @@
                     <td>{{ reader.last_name }}</td>
                     <td>{{ reader.card_number }}</td>
                     <td>
+                        <a class="btn btn-primary" href="{{ url_for('reader_loans', reader_id=reader.id) }}">
+                            <i class="fas fa-book"></i>
+                        </a>
                         <a class="btn btn-warning" href="{{ url_for('edit_reader', reader_id=reader.id) }}">
                             <i class="fas fa-edit"></i>
                         </a>

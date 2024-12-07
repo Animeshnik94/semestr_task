@@ -217,6 +217,14 @@ def delete_reader(reader_id):
     db.session.commit()
     flash('Читатель успешно удален!', 'success')
     return redirect(url_for('readers'))
+
+@app.route('/reader/<int:reader_id>/loans')
+@login_required
+def reader_loans(reader_id):
+    reader = Reader.query.get_or_404(reader_id) # Получаем читателя по его ID
+    loans = Loan.query.filter_by(reader_id=reader.id).all() # Извлекаем все займы читателя
+
+    return render_template('reader_loans.html', reader=reader, loans=loans)
     
 #---------------Loan---------------
 
@@ -294,6 +302,20 @@ def return_book(book_id):
 
     return render_template('return_book.html', form=form, book_id=book_id)
 
+#-------------Reports--------------------
+
+@app.route('/reports')
+@login_required
+def reports():
+    total_books = db.session.query(db.func.sum(Book.copies)).scalar() or 0
+
+    # Отчет по количеству копий книг по жанрам
+    genre_report = db.session.query(
+        Book.genre,
+        db.func.sum(Book.copies).label('count')  # Подсчитываем общее количество копий книг в каждом жанре
+    ).group_by(Book.genre).all()
+
+    return render_template('reports.html', total_books=total_books, genre_report=genre_report)
 
 if __name__ == '__main__':
     app.run(debug=True)

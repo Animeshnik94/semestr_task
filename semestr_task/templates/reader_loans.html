@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Посмотреть выданые книги{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 style="font-size: 26px; font-weight: bold; margin-bottom: 15px;">Долги у {{reader.first_name}} {{reader.last_name}}. Номер читательского билета - {{reader.card_number}}</h1>
+    <div id="bookTableContainer">
+        <table class="table table-bordered table-hover" id="bookTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Год издания</th>
+                    <th>Жанр</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="bookTableBody">
+                <!-- Записи будут динамически добавляться здесь -->
+                {% for loan in loans %}
+                <tr>
+                    <td>{{ loan.id }}</td>
+                    <td>{{ loan.book.title }}</td>
+                    <td>{{ loan.book.author }}</td>
+                    <td>{{ loan.book.publication_year }}</td>
+                    <td>{{ loan.book.genre }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ url_for('return_book', book_id=loan.book.id) }}">
+                            <i class="fa fa-chevron-circle-down"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="pagination" class="mt-3"></div>
+</div>
+{% endblock %}
